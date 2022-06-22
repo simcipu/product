@@ -1,20 +1,17 @@
 package it.mongo.repository.security;
 
 import it.mongo.repository.Profiles;
+import it.mongo.repository.document.Utenti;
 import it.mongo.repository.persistence.UtentiRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Optional;
 
 @Profile({Profiles.APPLICATION})
@@ -22,9 +19,6 @@ import java.util.Optional;
 public class CustomUserDetailsService implements UserDetailsService
 {
 	private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
-
-	@Value("${gestuser.srvUrl}")
-	private String srvUrl;
 
 	@Autowired
 	private UtentiRepository utentiRepository;
@@ -44,8 +38,8 @@ public class CustomUserDetailsService implements UserDetailsService
 	    	throw new UsernameNotFoundException(ErrMsg); 
 		} 
 		
-		Optional<it.mongo.repository.dto.Utenti> ut = utentiRepository.findByUserId(UserId);
-		it.mongo.repository.dto.Utenti utente = ut.get();
+		Optional<Utenti> ut = utentiRepository.findByUserId(UserId);
+		Utenti utente = ut.get();
 		if (utente == null)
 		{
 			ErrMsg = String.format("Utente %s non Trovato!!", UserId);

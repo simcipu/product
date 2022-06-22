@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class UserConfig 
 {
-	@Value("${gestuser.srvUrl}")
-	private String srvUrl;
+
 	private String userId;
 	private String password;
 }

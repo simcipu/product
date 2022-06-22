@@ -1,7 +1,7 @@
 package it.mongo.repository.persistence;
 
 
-import it.mongo.repository.dto.Utenti;
+import it.mongo.repository.document.Utenti;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;

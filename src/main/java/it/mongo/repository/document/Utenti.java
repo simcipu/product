@@ -1,4 +1,4 @@
-package it.mongo.repository.dto;
+package it.mongo.repository.document;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
