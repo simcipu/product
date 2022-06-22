@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
         if (repo.existsById(dto.getSerialNumber())) {
 
-            throw new ServiceRestException("serialnumber already exits!!!");
+            throw new ServiceRestException("Serial Number already exits!!!");
         }
 
         Product dco = mapper.map(dto);
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
 
         if (!repo.existsById(dto.getSerialNumber())) {
 
-            throw new ServiceRestException("serialnumber not exits!!!");
+            throw new ServiceRestException("Serial Number not exits!!!");
         }
 
         Product dco = mapper.map(dto);

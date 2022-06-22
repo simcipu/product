@@ -22,7 +22,11 @@ public class ControllerException {
     protected ResponseEntity<ErrorMessage> handleException(Exception ex)
     {
         ErrorMessage errorMessage = new ErrorMessage();
-        errorMessage.getErrors().add("error: "+ex);
+        if(ex.getMessage()!=null) {
+            errorMessage.getErrors().add(ex.getMessage());
+        }else{
+            errorMessage.getErrors().add(""+ex);
+        }
 
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
