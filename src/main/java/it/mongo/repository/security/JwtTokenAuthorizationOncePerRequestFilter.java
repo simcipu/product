@@ -42,11 +42,9 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException 
 	{
-		logger.debug("Authentication Request For '{}'", request.getRequestURL());
 
 		final String requestTokenHeader = request.getHeader(this.tokenHeader);
-		
-		logger.warn("Token: " + requestTokenHeader);
+
 
 		String username = null;
 		String jwtToken = null;
@@ -73,7 +71,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 			logger.warn("TOKEN NON VALIDO");
 		}
 
-		logger.debug("JWT_TOKEN_USERNAME_VALUE '{}'", username);
+
 		
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) 
 		{
