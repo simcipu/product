@@ -71,11 +71,11 @@ public class ProductController /*extends WebMvcConfigurerAdapter*/{
     }
     
     
-     @RequestMapping(value = {"/mongo/surname/{surname}"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+     @RequestMapping(value = {"/mongo/surname/{surname}/type/{type}"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<List<ProductDto>> ProductFromSurname(@PathVariable("surname") String surname) {
+    public ResponseEntity<List<ProductDto>> ProductFromSurname(@PathVariable("surname") String surname,@PathVariable("type") String type) {
 
-      List<ProductDto> li=service.list(surname);
+      List<ProductDto> li=service.list(surname,type);
 
       return new ResponseEntity<>(li, HttpStatus.OK);
 

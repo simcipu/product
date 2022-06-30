@@ -24,7 +24,7 @@ public interface ProductService {
     
     boolean update(ProductDto dto);
     
-    List<ProductDto> list(String surname);
+    List<ProductDto> list(String surname,String type);
     
     List<ProductDto> listAll();
 

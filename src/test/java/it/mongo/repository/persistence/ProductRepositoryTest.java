@@ -94,21 +94,22 @@ public class ProductRepositoryTest {
 
 
     @Test
-    public void simpleTest() {
+    public void getSurnameTypeTest() {
 
         repo.save(pr);
 
-        Product pr1 = repo.findById("01").get();
+        Query query = new Query(new Criteria().orOperator(Criteria.where("productCustumer.surname").is("cipullo"),Criteria.where("type").is("pippo")));
+        query.fields().include("productCustumer");
+        query.fields().include("type");
+        query.fields().include("name");
 
-        org.junit.jupiter.api.Assertions.assertTrue(!Objects.isNull(pr1));
-
-        List<ProductDto> list = productService.list("cipullo");
+        List<Product> list = mongoTemplate.find(query, Product.class);
 
         org.junit.jupiter.api.Assertions.assertTrue(!list.isEmpty());
-
-        List<Product> list1 = repo.findAll();
-        org.junit.jupiter.api.Assertions.assertTrue(!list1.isEmpty());
     }
+
+
+
     
     
     @Test

@@ -96,10 +96,12 @@ public class ProductServiceImpl implements ProductService {
         return true;
     }
 
-    @Override
-    public List<ProductDto> list(String surname) {
+
+    public List<ProductDto> list(String surname,String type) {
+
+
         List<ProductDto> li = new ArrayList<>();
-        List<Product> list = query(surname);
+        List<Product> list = queryOr(surname,type);
 
         if (!list.isEmpty()) {
 
@@ -148,6 +150,15 @@ public class ProductServiceImpl implements ProductService {
         Query query = new Query();
         query.addCriteria(Criteria.where("productCustumer.surname").is(surname));
         query.fields().include("productCustumer.$");
+        query.fields().include("type");
+        query.fields().include("name");
+
+        return mongoTemplate.find(query, Product.class);
+    }
+
+    public List<Product> queryOr(String surname,String type) {
+        Query query = new Query(new Criteria().orOperator(Criteria.where("productCustumer.surname").is(surname),Criteria.where("type").is(type)));
+        query.fields().include("productCustumer");
         query.fields().include("type");
         query.fields().include("name");
 
